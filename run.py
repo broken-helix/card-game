@@ -7,6 +7,14 @@ def game_introduction():
     print("Welcome to the blackjack game!")
     name = input("Please enter your player name: ")
     print(f"Welcome to Blackjack {name}.")
+    option = input("Would you like to read the rules (R) or play the game (P)?: ").lower()
+    if option == "r":
+        print("Display Rules")
+        display_rules()
+    elif option == "p":
+        print("Play Game")
+    else:
+        print("error")
 
 def create_card_pack():
     """
