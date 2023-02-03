@@ -13,11 +13,15 @@ def game_introduction():
         display_rules()
     elif option == "p":
         print("Play Game")
+        play_game()
     else:
         print("error")
 
 def display_rules():
-    print("Display Rules Function")        
+    print("Display Rules Function")   
+
+def play_game():
+    print("Play Game Function")     
 
 def create_card_pack():
     """
