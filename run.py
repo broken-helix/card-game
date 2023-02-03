@@ -44,10 +44,20 @@ def create_card_pack():
     return pack
 
 def create_player_hand(pack):
+    first_score = 0
     global player_hand
     while len(player_hand) < 2:
         player_hand.append(pack.pop(-1))
-    print(player_hand)
+    player_card_one = int(player_hand[0][1][1])
+    player_card_two = int(player_hand[1][1][1])
+    first_score = player_card_one + player_card_two
+    print(f"Your hand is the {player_hand[0][1][0]} of {player_hand[0][0][1]} and the {player_hand[1][1][0]} of {player_hand[1][0][1]}.  Your score is: {first_score}.")
+
+def create_computer_hand(pack):
+    global computer_hand
+    while len(computer_hand) < 2:
+        computer_hand.append(pack.pop(-1))
+    print(f"The computer's visible card is the {computer_hand[0][1][0]} of {computer_hand[0][0][1]}.")
 
 def play_game():
     """
@@ -58,3 +68,4 @@ def play_game():
 game_introduction()
 create_card_pack()
 create_player_hand(pack)
+create_computer_hand(pack)
