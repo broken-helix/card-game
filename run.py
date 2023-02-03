@@ -16,6 +16,9 @@ def game_introduction():
     else:
         print("error")
 
+def display_rules():
+    print("Display Rules Function")        
+
 def create_card_pack():
     """
     Creates an ordered pack (list) of playing cards
