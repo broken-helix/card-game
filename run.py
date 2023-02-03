@@ -18,9 +18,15 @@ def game_introduction():
         print("error")
 
 def display_rules():
+    """
+    Displays rules of the game
+    """
     print("Display Rules Function")   
 
 def play_game():
+    """
+    Starts the game
+    """
     print("Play Game Function")     
 
 def create_card_pack():
