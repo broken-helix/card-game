@@ -11,8 +11,15 @@ def game_introduction():
     would like to read the rules or play the game.
     """
     print("Welcome to the blackjack game!")
-    name = input("Please enter your player name: ")
-    print(f"Welcome to Blackjack {name}.")
+    while True:
+        name = input("Please enter your player name: ").capitalize()
+        if (name != "Computer") and (name != ""):
+            print(f"Welcome to Blackjack {name}.")
+            break
+        elif name == "Computer":
+            print("Sorry. You can't choose that name. Please try again")
+        else:
+            print("Sorry. You chose a blank name. Please try again")
     option = input("Would you like to read the rules (R) or play the game (P)?: ").lower()
     if option == "r":
         display_rules()
@@ -80,6 +87,13 @@ def create_player_hand(pack):
     for keys, value in player_hand.items():
         print(keys)
     print(f"Your score is {player_score}")
+    stick_twist = input("Would you like to Stick (S) or Twist (T)?: ").lower()
+    if stick_twist == "s":
+        print("You chose to Stick")
+    elif stick_twist == "t":
+        print("You chose to Twist")
+    else:
+        print("error")
     return player_hand
 
 def play_game():
