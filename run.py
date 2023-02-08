@@ -83,6 +83,8 @@ def create_player_hand(pack):
         player_hand.append(pack.popitem())
     player_hand = dict(player_hand)
     player_score = sum(player_hand.values())
+    if player_score > 21:
+        player_score = 12
     print("Your cards are:")
     for keys, value in player_hand.items():
         print(keys)
