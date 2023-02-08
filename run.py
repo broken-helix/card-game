@@ -1,5 +1,9 @@
 import random
 
+suits = ["Diamonds", "Hearts", "Clubs", "Spades"]
+ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
+values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
+
 def game_introduction():
     """
     Displays an introduction/ welcome message to the user, 
@@ -27,16 +31,20 @@ def display_rules():
 
 def create_card_pack():
     """
-    Creates an ordered pack (list) of playing cards
-    suitable for printing to the terminal
+    Creates an ordered list (pack) of playing cards as 
+    strings, converts list to dictionary (cardpack) to add 
+    card values to card keys, converts dictionary (cardpack) 
+    back to list (pack), shuffles list (pack) and converts 
+    shuffled list (pack) to shuffled dictionary (pack)
     """
-    suits = ["Diamonds", "Hearts", "Clubs", "Spades"]
-    ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
     pack = []
     for suit in suits:
         for rank in ranks:
             pack.append(rank + ' of ' + suit)
+    cardpack = dict(zip(pack, values*4))
+    pack = list(cardpack.items())
     random.shuffle(pack)
+    pack = dict(pack)
     return pack
 
 def create_player_hand(pack):
@@ -47,9 +55,9 @@ def create_player_hand(pack):
     """
     player_hand = []
     while len(player_hand) < 2:
-        player_hand.append(pack.pop(-1))
+        player_hand.append(pack.popitem())
     print("Your cards are:")
-    print(f"{player_hand[0]} and {player_hand[1]}.")
+    print(f"{player_hand[0][0]} and {player_hand[1][0]}.")
     return player_hand
 
 def create_computer_hand(pack):
@@ -60,8 +68,8 @@ def create_computer_hand(pack):
     """
     computer_hand = []
     while len(computer_hand) < 2:
-        computer_hand.append(pack.pop(-1))
-    print(f"The computer's show card is {computer_hand[0]}.")
+        computer_hand.append(pack.popitem())
+    print(f"The computer's show card is {computer_hand[0][0]}.")
     return computer_hand
 
 def play_game():
