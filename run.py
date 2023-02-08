@@ -79,10 +79,13 @@ def create_player_hand(pack):
     """
     player_score = 0
     player_hand = []
+    # removes two cards from pack and adds to player hand
     while len(player_hand) < 2:
         player_hand.append(pack.popitem())
+    # converts player hand back to dictionary and totals values
     player_hand = dict(player_hand)
     player_score = sum(player_hand.values())
+    # adjusts score in event of two aces as first cards
     if player_score > 21:
         player_score = 12
     print("Your cards are:")
@@ -98,6 +101,16 @@ def create_player_hand(pack):
         print("error")
     return player_hand
 
+def twist(pack, player_hand):
+    player_hand = list(player_hand.items())
+    player_hand.append(pack.popitem())
+    player_hand = dict(player_hand)
+    player_score = sum(player_hand.values())
+    print("Your cards are:")
+    for keys, value in player_hand.items():
+        print(keys)
+    print(f"Your score is {player_score}")
+
 def play_game():
     """
     Starts the game
@@ -105,5 +118,6 @@ def play_game():
     pack = create_card_pack()
     computer_hand = create_computer_hand(pack)
     player_hand = create_player_hand(pack)
+    twist(pack, player_hand)
 
 game_introduction()
