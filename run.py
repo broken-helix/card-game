@@ -47,37 +47,47 @@ def create_card_pack():
     pack = dict(pack)
     return pack
 
-def create_player_hand(pack):
-    """
-    Selects two cards for the player from 
-    the shuffled pack, adds them to a new list 
-    and prints the results.
-    """
-    player_hand = []
-    while len(player_hand) < 2:
-        player_hand.append(pack.popitem())
-    print("Your cards are:")
-    print(f"{player_hand[0][0]} and {player_hand[1][0]}.")
-    return player_hand
-
 def create_computer_hand(pack):
     """
     Selects two cards for the computer from 
-    the shuffled pack, adds them to a new list 
-    and prints the first card.
+    the shuffled pack, adds them to a new list,
+    prints the first card, then converts list to 
+    dictionary and sums values to get score
     """
     computer_hand = []
+    computer_score = 0
     while len(computer_hand) < 2:
         computer_hand.append(pack.popitem())
-    print(f"The computer's show card is {computer_hand[0][0]}.")
+    print("The computer's show card is:")
+    print(f"{computer_hand[0][0]}")
+    computer_hand = dict(computer_hand)
+    computer_score = sum(computer_hand.values())
     return computer_hand
+
+def create_player_hand(pack):
+    """
+    Removes two cards for the player from the shuffled 
+    dictionary (pack), adds them to a new list (player_hand)
+    and converts list to dictionary
+    """
+    player_score = 0
+    player_hand = []
+    while len(player_hand) < 2:
+        player_hand.append(pack.popitem())
+    player_hand = dict(player_hand)
+    player_score = sum(player_hand.values())
+    print("Your cards are:")
+    for keys, value in player_hand.items():
+        print(keys)
+    print(f"Your score is {player_score}")
+    return player_hand
 
 def play_game():
     """
     Starts the game
     """
     pack = create_card_pack()
-    player_hand = create_player_hand(pack)
     computer_hand = create_computer_hand(pack)
+    player_hand = create_player_hand(pack)
 
 game_introduction()
