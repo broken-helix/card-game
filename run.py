@@ -2,11 +2,13 @@ import random
 
 suits = ["Diamonds", "Hearts", "Clubs", "Spades"]
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
+#ranks = ["Ace"]
 values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
+#values = [11]
 
 def game_introduction():
     """
-    Displays an introduction/ welcome message to the user, 
+    Displays an introduction / welcome message to the user, 
     asks the user for their name and asks the user if they 
     would like to read the rules or play the game.
     """
@@ -54,6 +56,7 @@ def create_card_pack():
     pack = dict(pack)
     return pack
 
+
 def create_computer_hand(pack):
     """
     Selects two cards for the computer from 
@@ -62,14 +65,13 @@ def create_computer_hand(pack):
     dictionary and sums values to get score
     """
     computer_hand = []
-    computer_score = 0
     while len(computer_hand) < 2:
         computer_hand.append(pack.popitem())
     print("The computer's show card is:")
     print(f"{computer_hand[0][0]}")
     computer_hand = dict(computer_hand)
-    computer_score = sum(computer_hand.values())
     return computer_hand
+
 
 def create_player_hand(pack):
     """
@@ -148,6 +150,45 @@ def twist(pack, player_hand):
         print("BUST!!!")
 
 
+def ace_values(computer_hand):
+    computer_score = sum(computer_hand.values())
+    if computer_score > 21:
+        for key, value in computer_hand.items():
+            if "Ace" in key and value == 11:
+                updated_value = {key: 1}
+                computer_hand.update(updated_value)
+                update_score = sum(computer_hand.values())
+                if update_score > 21:
+                    continue
+                else:
+                    computer_score = update_score
+                    break
+
+
+def computer_twist(pack, computer_hand):
+    computer_score = sum(computer_hand.values())
+    ace_values(computer_hand)
+    while computer_score <= random.choice(range(16, 19)):
+        computer_hand_list = list(computer_hand.items())
+        computer_hand_list.append(pack.popitem())
+        computer_hand = dict(computer_hand_list)
+        computer_score = sum(computer_hand.values())
+        ace_values(computer_hand)
+    print("The computer has:")
+    for keys, value in computer_hand.items():
+        print(keys)
+    print(f"The computer scored: {computer_score}")
+
+def play_again():
+    new_game = input("Would you like to play again? (Y or N): ").lower()
+    if new_game == "y":
+        play_game()
+    elif new_game == "n":
+        print("Bye-bye!")
+    else:
+        play_again()
+
+
 def play_game():
     """
     Starts the game
@@ -155,6 +196,8 @@ def play_game():
     pack = create_card_pack()
     computer_hand = create_computer_hand(pack)
     player_hand = create_player_hand(pack)
-    twist(pack, player_hand)
+    player_choice(pack, player_hand)
+    computer_twist(pack, computer_hand)
+    play_again()
 
 game_introduction()
