@@ -120,13 +120,25 @@ def player_choice(pack, player_hand):
 
 
 def twist(pack, player_hand):
-    player_hand = list(player_hand.items())
-    player_hand.append(pack.popitem())
-    player_hand = dict(player_hand)
+    player_hand_list = list(player_hand.items())
+    player_hand_list.append(pack.popitem())
+    player_hand = dict(player_hand_list)
     player_score = sum(player_hand.values())
     print("Your cards are:")
     for keys, value in player_hand.items():
         print(keys)
+    if player_score > 21:
+        for key, value in player_hand.items():
+            if "Ace" in key and value == 11:
+                updated_value = {key: 1}
+                player_hand.update(updated_value)
+                update_score = sum(player_hand.values())
+
+                if update_score > 21:
+                    continue
+                else:
+                    player_score = update_score
+                    break
     print(f"Your score is {player_score}")
 
 def play_game():
