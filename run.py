@@ -87,7 +87,17 @@ def create_player_hand(pack):
     player_score = sum(player_hand.values())
     # adjusts score in event of two aces as first cards
     if player_score > 21:
-        player_score = 12
+        for key, value in player_hand.items():
+            if "Ace" in key and value == 11:
+                updated_value = {key: 1}
+                player_hand.update(updated_value)
+                update_score = sum(player_hand.values())
+
+                if update_score > 21:
+                    continue
+                else:
+                    player_score = update_score
+                    break
     print("Your cards are:")
     for keys, value in player_hand.items():
         print(keys)
