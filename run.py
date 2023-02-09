@@ -92,14 +92,22 @@ def create_player_hand(pack):
     for keys, value in player_hand.items():
         print(keys)
     print(f"Your score is {player_score}")
+    return player_hand
+
+
+def player_choice(pack, player_hand):
+    """
+    Asks the player if they would like to Stick with their
+    current hand or Twist (receive another card)
+    """
     stick_twist = input("Would you like to Stick (S) or Twist (T)?: ").lower()
     if stick_twist == "s":
         print("You chose to Stick")
     elif stick_twist == "t":
-        print("You chose to Twist")
+        twist(pack, player_hand)
     else:
         print("error")
-    return player_hand
+
 
 def twist(pack, player_hand):
     player_hand = list(player_hand.items())
