@@ -140,6 +140,13 @@ def twist(pack, player_hand):
                     player_score = update_score
                     break
     print(f"Your score is {player_score}")
+    if player_score < 21:
+        player_choice(pack, player_hand)
+    elif player_score == 21:
+        print("Blackjack!")
+    else:
+        print("BUST!!!")
+
 
 def play_game():
     """
