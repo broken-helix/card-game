@@ -1,4 +1,5 @@
 import random
+import sys
 
 suits = ["Diamonds", "Hearts", "Clubs", "Spades"]
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
@@ -12,6 +13,7 @@ def game_introduction():
     would like to read the rules or play the game.
     """
     print("Welcome to the blackjack game!")
+    print("")
     while True:
         name = input("Please enter your player name: ").capitalize()
         if (name != "Computer") and (name != ""):
@@ -151,6 +153,7 @@ def player_ace_values(player_hand):
                     break
     return player_score
 
+
 def computer_ace_values(computer_hand):
     """
     Checks computer hand for aces if score greater than 21
@@ -200,6 +203,7 @@ def play_again():
         play_game()
     elif new_game == "n":
         print("Bye-bye!")
+        sys.exit()
     else:
         play_again()
 
