@@ -13,12 +13,13 @@ def game_introduction():
     asks the user for their name and asks the user if they 
     would like to read the rules or play the game.
     """
-    print("Welcome to the blackjack game!")
-    print("")
+    print(pyfiglet.figlet_format("WELCOME TO"))
+    print(pyfiglet.figlet_format("BLACKJACK  !"))
     while True:
         name = input("Please enter your player name: ").capitalize()
         if (name != "Computer") and (name != ""):
-            print(f"Welcome to Blackjack {name}.")
+            print("")
+            print(pyfiglet.figlet_format(f"Hello {name} !"))
             break
         elif name == "Computer":
             print("Sorry. You can't choose that name. Please try again...")
@@ -29,8 +30,11 @@ def game_introduction():
         if option == "r":
             display_rules()
         elif option == "p":
+            print("")
+            print(pyfiglet.figlet_format("Let's Play ..."))
             play_game()
         else:
+            print("")
             print("Sorry. You can only select 'R' (rules) or 'P' (play game)...")
 
 
@@ -55,6 +59,7 @@ def create_card_pack():
             pack.append(rank + ' of ' + suit)
     cardpack = dict(zip(pack, values*4))
     pack = list(cardpack.items())
+    print("Shuffling the pack...")
     random.shuffle(pack)
     pack = dict(pack)
     return pack
@@ -70,8 +75,11 @@ def create_computer_hand(pack):
     computer_hand = []
     while len(computer_hand) < 2:
         computer_hand.append(pack.popitem())
+    print("Dealing out the cards...")
+    print("")
     print("The computer's show card is:")
     print(f"{computer_hand[0][0]}")
+    print("")
     computer_hand = dict(computer_hand)
     return computer_hand
 
@@ -94,7 +102,9 @@ def create_player_hand(pack):
     print("Your cards are:")
     for keys, value in player_hand.items():
         print(keys)
+    print("")
     print(f"Your score is {player_score}")
+    print("")
     return player_hand
 
 
@@ -103,13 +113,25 @@ def player_choice(pack, player_hand):
     Asks the player if they would like to Stick with their
     current hand or Twist (receive another card)
     """
-    stick_twist = input("Would you like to Stick (S) or Twist (T)?: ").lower()
-    if stick_twist == "s":
-        print("You chose to Stick")
-    elif stick_twist == "t":
-        twist(pack, player_hand)
+    player_score = player_ace_values(player_hand)
+    if player_score == 21:
+        print(pyfiglet.figlet_format("Blackjack !"))
     else:
-        print("error")
+        while player_score != 21:
+            stick_twist = input("Would you like to Stick (S) or Twist (T)?: ").lower()
+            if stick_twist == "s":
+                print("")
+                print(f"You chose to Stick with {player_score} points")
+                break
+            elif stick_twist == "t":
+                print("")
+                print("You chose to Twist...")
+                twist(pack, player_hand)
+                break
+            else:
+                print("")
+                print("Error. You can only select Stick (S) or Twist (T)!")
+                continue
 
 
 def twist(pack, player_hand):
@@ -118,20 +140,24 @@ def twist(pack, player_hand):
     and totals player_score
     """
     player_hand_list = list(player_hand.items())
+    print("Dealing you a new card...")
+    print("")
     player_hand_list.append(pack.popitem())
+    print(f"Your new card is the {player_hand_list[-1][0]}")
+    print("")
     player_hand = dict(player_hand_list)
     player_score = sum(player_hand.values())
     print("Your cards are:")
     for keys, value in player_hand.items():
         print(keys)
     player_score = player_ace_values(player_hand)
-    print(f"Your score is {player_score}")
-    if player_score < 21:
+    print("")
+    print(f"Your score is: {player_score}")
+    print("")
+    if player_score <= 21:
         player_choice(pack, player_hand)
-    elif player_score == 21:
-        print("Blackjack!")
     else:
-        print("BUST!!!")
+        print(pyfiglet.figlet_format("BUST !"))
 
 
 def player_ace_values(player_hand):
@@ -176,7 +202,7 @@ def computer_ace_values(computer_hand):
     return computer_score
 
 
-def computer_twist(pack, computer_hand):
+def computer_twist(pack, computer_hand, player_hand):
     """
     Selects new cards for computer hand until score
     reaches a random total approaching the game limit
@@ -185,15 +211,37 @@ def computer_twist(pack, computer_hand):
     # checks for aces and changes value if score over 21
     computer_score = computer_ace_values(computer_hand)
     while computer_score <= random.choice(range(16, 19)):
+        print("")
+        print("")
+        print("The computer selected Twist")
+        print("Dealing the computer a new card")
+        print("")
         computer_hand_list = list(computer_hand.items())
         computer_hand_list.append(pack.popitem())
+        print(f"The computer's new card is the {computer_hand_list[-1][0]}")
         computer_hand = dict(computer_hand_list)
         computer_score = sum(computer_hand.values())
+    print("")
+    print("The computer chose to Stick")
+    print("")
     computer_score = computer_ace_values(computer_hand)
     print("The computer has:")
     for keys, value in computer_hand.items():
         print(keys)
+    print("")
     print(f"The computer scored: {computer_score}")
+    if computer_score == 21:
+        print(pyfiglet.figlet_format("Blackjack !"))
+    elif computer_score > 21:
+        print(pyfiglet.figlet_format("Bust !"))
+    player_score = player_ace_values(player_hand)
+    print(f"Your score was: {player_score}")
+    if player_score == 21:
+        print(pyfiglet.figlet_format("Blackjack !"))
+    elif player_score > 21:
+        print(pyfiglet.figlet_format("Bust !"))
+    print("")
+
 
 def play_again():
     """
@@ -217,7 +265,7 @@ def play_game():
     computer_hand = create_computer_hand(pack)
     player_hand = create_player_hand(pack)
     player_choice(pack, player_hand)
-    computer_twist(pack, computer_hand)
+    computer_twist(pack, computer_hand, player_hand)
     play_again()
 
 game_introduction()
