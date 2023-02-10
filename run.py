@@ -2,9 +2,8 @@ import random
 
 suits = ["Diamonds", "Hearts", "Clubs", "Spades"]
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
-#ranks = ["Ace"]
 values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
-#values = [11]
+
 
 def game_introduction():
     """
@@ -19,23 +18,24 @@ def game_introduction():
             print(f"Welcome to Blackjack {name}.")
             break
         elif name == "Computer":
-            print("Sorry. You can't choose that name. Please try again")
+            print("Sorry. You can't choose that name. Please try again...")
         else:
-            print("Sorry. You chose a blank name. Please try again")
-    option = input("Would you like to read the rules (R) or play the game (P)?: ").lower()
-    if option == "r":
-        display_rules()
-    elif option == "p":
-        play_game()
-    else:
-        print("error")
+            print("Sorry. You chose a blank name. Please try again...")
+    while True:
+        option = input("Would you like to read the rules (R) or play the game (P)?: ").lower()
+        if option == "r":
+            display_rules()
+        elif option == "p":
+            play_game()
+        else:
+            print("Sorry. You can only select 'R' (rules) or 'P' (play game)...")
 
 
 def display_rules():
     """
-    Displays rules of the game
+    Displays the rules of the game
     """
-    print("Display Rules Function")    
+    print("Display Rules Function")
 
 
 def create_card_pack():
@@ -79,7 +79,6 @@ def create_player_hand(pack):
     dictionary (pack), adds them to a new list (player_hand)
     and converts list to dictionary
     """
-    player_score = 0
     player_hand = []
     # removes two cards from pack and adds to player hand
     while len(player_hand) < 2:
@@ -88,18 +87,7 @@ def create_player_hand(pack):
     player_hand = dict(player_hand)
     player_score = sum(player_hand.values())
     # adjusts score in event of two aces as first cards
-    if player_score > 21:
-        for key, value in player_hand.items():
-            if "Ace" in key and value == 11:
-                updated_value = {key: 1}
-                player_hand.update(updated_value)
-                update_score = sum(player_hand.values())
-
-                if update_score > 21:
-                    continue
-                else:
-                    player_score = update_score
-                    break
+    player_score = player_ace_values(player_hand)
     print("Your cards are:")
     for keys, value in player_hand.items():
         print(keys)
@@ -122,6 +110,10 @@ def player_choice(pack, player_hand):
 
 
 def twist(pack, player_hand):
+    """
+    Draws a new card from the deck, adds to player_hand
+    and totals player_score
+    """
     player_hand_list = list(player_hand.items())
     player_hand_list.append(pack.popitem())
     player_hand = dict(player_hand_list)
@@ -129,18 +121,7 @@ def twist(pack, player_hand):
     print("Your cards are:")
     for keys, value in player_hand.items():
         print(keys)
-    if player_score > 21:
-        for key, value in player_hand.items():
-            if "Ace" in key and value == 11:
-                updated_value = {key: 1}
-                player_hand.update(updated_value)
-                update_score = sum(player_hand.values())
-
-                if update_score > 21:
-                    continue
-                else:
-                    player_score = update_score
-                    break
+    player_score = player_ace_values(player_hand)
     print(f"Your score is {player_score}")
     if player_score < 21:
         player_choice(pack, player_hand)
@@ -150,7 +131,32 @@ def twist(pack, player_hand):
         print("BUST!!!")
 
 
-def ace_values(computer_hand):
+def player_ace_values(player_hand):
+    """
+    Checks player hand for aces if score greater is than 21
+    and changes Ace value from 11 to 1, while score remains
+    higher than 21.
+    """
+    player_score = sum(player_hand.values())
+    if player_score > 21:
+        for key, value in player_hand.items():
+            if "Ace" in key and value == 11:
+                updated_value = {key: 1}
+                player_hand.update(updated_value)
+                update_score = sum(player_hand.values())
+                if update_score > 21:
+                    continue
+                else:
+                    player_score = update_score
+                    break
+    return player_score
+
+def computer_ace_values(computer_hand):
+    """
+    Checks computer hand for aces if score greater than 21
+    and changes Ace value from 11 to 1, while score remains
+    higher than 21
+    """
     computer_score = sum(computer_hand.values())
     if computer_score > 21:
         for key, value in computer_hand.items():
@@ -163,23 +169,32 @@ def ace_values(computer_hand):
                 else:
                     computer_score = update_score
                     break
+    return computer_score
 
 
 def computer_twist(pack, computer_hand):
+    """
+    Selects new cards for computer hand until score
+    reaches a random total approaching the game limit
+    """
     computer_score = sum(computer_hand.values())
-    ace_values(computer_hand)
+    # checks for aces and changes value if score over 21
+    computer_score = computer_ace_values(computer_hand)
     while computer_score <= random.choice(range(16, 19)):
         computer_hand_list = list(computer_hand.items())
         computer_hand_list.append(pack.popitem())
         computer_hand = dict(computer_hand_list)
         computer_score = sum(computer_hand.values())
-        ace_values(computer_hand)
+    computer_score = computer_ace_values(computer_hand)
     print("The computer has:")
     for keys, value in computer_hand.items():
         print(keys)
     print(f"The computer scored: {computer_score}")
 
 def play_again():
+    """
+    Asks user whether they would like to restart the game or end the game
+    """
     new_game = input("Would you like to play again? (Y or N): ").lower()
     if new_game == "y":
         play_game()
