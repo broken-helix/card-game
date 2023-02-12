@@ -116,22 +116,26 @@ def player_choice(pack, player_hand):
     player_score = player_ace_values(player_hand)
     if player_score == 21:
         print(pyfiglet.figlet_format("Blackjack !"))
+        return player_score
     else:
-        while player_score != 21:
+        while player_score < 21:
             stick_twist = input("Would you like to Stick (S) or Twist (T)?: ").lower()
-            if stick_twist == "s":
-                print("")
-                print(f"You chose to Stick with {player_score} points")
-                break
-            elif stick_twist == "t":
+            if stick_twist == "t":
                 print("")
                 print("You chose to Twist...")
-                twist(pack, player_hand)
+                player_hand = twist(pack, player_hand)
+                player_score = sum(player_hand.values())
+                continue
+            elif stick_twist == "s":
+                print("")
+                print(f"You chose to Stick with {player_score} points")
+                return player_score
                 break
             else:
                 print("")
                 print("Error. You can only select Stick (S) or Twist (T)!")
                 continue
+        return player_score   
 
 
 def twist(pack, player_hand):
@@ -144,7 +148,6 @@ def twist(pack, player_hand):
     print("")
     player_hand_list.append(pack.popitem())
     print(f"Your new card is the {player_hand_list[-1][0]}")
-    print("")
     player_hand = dict(player_hand_list)
     player_score = sum(player_hand.values())
     print("Your cards are:")
@@ -154,10 +157,14 @@ def twist(pack, player_hand):
     print("")
     print(f"Your score is: {player_score}")
     print("")
-    if player_score <= 21:
-        player_choice(pack, player_hand)
-    else:
+    if player_score < 21:
+        return player_hand
+    elif player_score > 21:
         print(pyfiglet.figlet_format("BUST !"))
+        return player_hand
+    elif player_score == 21:
+        print(pyfiglet.figlet_format("BLACKJACK !"))
+        return player_hand
 
 
 def player_ace_values(player_hand):
@@ -202,7 +209,7 @@ def computer_ace_values(computer_hand):
     return computer_score
 
 
-def computer_twist(pack, computer_hand, player_hand):
+def computer_twist(pack, computer_hand):
     """
     Selects new cards for computer hand until score
     reaches a random total approaching the game limit
@@ -230,17 +237,13 @@ def computer_twist(pack, computer_hand, player_hand):
         print(keys)
     print("")
     print(f"The computer scored: {computer_score}")
-    if computer_score == 21:
-        print(pyfiglet.figlet_format("Blackjack !"))
-    elif computer_score > 21:
-        print(pyfiglet.figlet_format("Bust !"))
-    player_score = player_ace_values(player_hand)
-    print(f"Your score was: {player_score}")
-    if player_score == 21:
-        print(pyfiglet.figlet_format("Blackjack !"))
-    elif player_score > 21:
-        print(pyfiglet.figlet_format("Bust !"))
-    print("")
+    return computer_score
+
+
+def compare_scores(player_score, computer_score):
+    print(computer_score)
+    print(player_score)
+    
 
 
 def play_again():
@@ -264,8 +267,9 @@ def play_game():
     pack = create_card_pack()
     computer_hand = create_computer_hand(pack)
     player_hand = create_player_hand(pack)
-    player_choice(pack, player_hand)
-    computer_twist(pack, computer_hand, player_hand)
+    player_score = player_choice(pack, player_hand)
+    computer_score = computer_twist(pack, computer_hand)
+    compare_scores(player_score, computer_score)
     play_again()
 
 game_introduction()
