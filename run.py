@@ -156,7 +156,7 @@ def player_choice(pack, player_hand):
                 break
             else:
                 print("")
-                print("Error. You can only select Stick (S) or Twist (T)!/n")
+                print("Error. You can only select Stick (S) or Twist (T)!\n")
                 continue
         return player_score   
 
@@ -262,11 +262,11 @@ def computer_twist(pack, computer_hand):
         typing_print(f"The computer's new card is the {computer_hand_list[-1][0]}{new_line}")
         computer_hand = dict(computer_hand_list)
         computer_score = sum(computer_hand.values())
+        computer_score = computer_ace_values(computer_hand)
     print("")
     time.sleep(0.5)
     typing_print("The computer chose to Stick\n")
     print("")
-    computer_score = computer_ace_values(computer_hand)
     time.sleep(0.5)
     typing_print("The computer has: \n")
     time.sleep(0.5)
@@ -275,11 +275,44 @@ def computer_twist(pack, computer_hand):
     print("")
     time.sleep(0.5)
     typing_print(f"The computer scored: {computer_score}{new_line}")
-    return computer_score
+    if computer_score == 21:
+        time.sleep(1.0)
+        print(pyfiglet.figlet_format("BLACKJACK !"))
+        return computer_score
+    elif computer_score > 21:
+        time.sleep(1.0)
+        print(pyfiglet.figlet_format("BUST !"))
+        return computer_score
+    else:
+        return computer_score
 
 
 def compare_scores(player_score, computer_score):
     typing_print(f"You scored: {player_score}{new_line}")
+    if player_score == 21:
+        if computer_score > 21:
+            print("You won with BlackJack!!!")
+        elif computer_score == 21:
+            print("You both got Blackjack!!! It's a draw!")
+    elif player_score > 21:
+        if computer_score == 21:
+            print("The computer got Blackjack!!! You lost the game!")
+        elif computer_score > 21:
+            print("You both went BUST!!!")
+        elif computer_score < 21:
+            print("You lost the game!")
+    else:
+        if computer_score == 21:
+            print("The computer got Blackjack!!! You lost the game!")
+        elif computer_score > 21:
+            print("The computer went BUST!!! You won the game!")
+        else:
+            if computer_score < player_score:
+                print("You won the game!")
+            elif computer_score > player_score:
+                print("You lost the game!")
+            else:
+                print("It's a draw!")
 
 
 def play_again():
