@@ -1,11 +1,27 @@
 import random
 import sys
 import pyfiglet
+import time
 
 suits = ["Diamonds", "Hearts", "Clubs", "Spades"]
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
 values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
 
+new_line = "\n"
+
+def typing_print(text):
+  for character in text:
+    sys.stdout.write(character)
+    sys.stdout.flush()
+    time.sleep(0.05)
+  
+def typing_input(text):
+  for character in text:
+    sys.stdout.write(character)
+    sys.stdout.flush()
+    time.sleep(0.05)
+  value = input()  
+  return value  
 
 def game_introduction():
     """
@@ -16,17 +32,17 @@ def game_introduction():
     print(pyfiglet.figlet_format("WELCOME TO"))
     print(pyfiglet.figlet_format("BLACKJACK  !"))
     while True:
-        name = input("Please enter your player name: ").capitalize()
+        name = typing_input("Please enter your player name: ").capitalize()
         if (name != "Computer") and (name != ""):
             print("")
             print(pyfiglet.figlet_format(f"Hello {name} !"))
             break
         elif name == "Computer":
-            print("Sorry. You can't choose that name. Please try again...")
+            typing_print("Sorry. You can't choose that name. Please try again...")
         else:
-            print("Sorry. You chose a blank name. Please try again...")
+            typing_print("Sorry. You chose a blank name. Please try again...")
     while True:
-        option = input("Would you like to read the rules (R) or play the game (P)?: ").lower()
+        option = typing_input("Would you like to read the rules (R) or play the game (P)?: ").lower()
         if option == "r":
             display_rules()
         elif option == "p":
@@ -59,7 +75,7 @@ def create_card_pack():
             pack.append(rank + ' of ' + suit)
     cardpack = dict(zip(pack, values*4))
     pack = list(cardpack.items())
-    print("Shuffling the pack...")
+    typing_print("Shuffling the pack...\n")
     random.shuffle(pack)
     pack = dict(pack)
     return pack
@@ -75,10 +91,12 @@ def create_computer_hand(pack):
     computer_hand = []
     while len(computer_hand) < 2:
         computer_hand.append(pack.popitem())
-    print("Dealing out the cards...")
+    typing_print("Dealing out the cards...\n")
     print("")
-    print("The computer's show card is:")
+    typing_print("The computer's show card is: \n")
+    time.sleep(0.5)
     print(f"{computer_hand[0][0]}")
+    time.sleep(0.5)
     print("")
     computer_hand = dict(computer_hand)
     return computer_hand
@@ -99,12 +117,15 @@ def create_player_hand(pack):
     player_score = sum(player_hand.values())
     # adjusts score in event of two aces as first cards
     player_score = player_ace_values(player_hand)
-    print("Your cards are:")
+    typing_print("Your cards are: \n")
+    time.sleep(0.5)
     for keys, value in player_hand.items():
         print(keys)
     print("")
-    print(f"Your score is {player_score}")
+    time.sleep(0.5)
+    typing_print(f"Your score is {player_score}{new_line}")
     print("")
+    time.sleep(0.5)
     return player_hand
 
 
@@ -115,25 +136,27 @@ def player_choice(pack, player_hand):
     """
     player_score = player_ace_values(player_hand)
     if player_score == 21:
+        time.sleep(1.0)
         print(pyfiglet.figlet_format("Blackjack !"))
         return player_score
     else:
         while player_score < 21:
-            stick_twist = input("Would you like to Stick (S) or Twist (T)?: ").lower()
+            stick_twist = typing_input("Would you like to Stick (S) or Twist (T)?: ").lower()
             if stick_twist == "t":
                 print("")
-                print("You chose to Twist...")
+                time.sleep(0.5)
+                typing_print("You chose to Twist...\n")
                 player_hand = twist(pack, player_hand)
                 player_score = sum(player_hand.values())
                 continue
             elif stick_twist == "s":
                 print("")
-                print(f"You chose to Stick with {player_score} points")
+                typing_print(f"You chose to Stick with {player_score} points{new_line}")
                 return player_score
                 break
             else:
                 print("")
-                print("Error. You can only select Stick (S) or Twist (T)!")
+                print("Error. You can only select Stick (S) or Twist (T)!/n")
                 continue
         return player_score   
 
@@ -144,25 +167,34 @@ def twist(pack, player_hand):
     and totals player_score
     """
     player_hand_list = list(player_hand.items())
-    print("Dealing you a new card...")
+    time.sleep(0.5)
+    typing_print("Dealing you a new card...\n")
     print("")
     player_hand_list.append(pack.popitem())
-    print(f"Your new card is the {player_hand_list[-1][0]}")
+    time.sleep(0.5)
+    typing_print(f"Your new card is the {player_hand_list[-1][0]}{new_line}")
+    print("")
     player_hand = dict(player_hand_list)
     player_score = sum(player_hand.values())
-    print("Your cards are:")
+    time.sleep(0.5)
+    typing_print("Your cards are: \n")
+    time.sleep(0.5)
     for keys, value in player_hand.items():
         print(keys)
     player_score = player_ace_values(player_hand)
     print("")
-    print(f"Your score is: {player_score}")
+    time.sleep(0.5)
+    typing_print(f"Your score is: {player_score}{new_line}")
+    time.sleep(0.5)
     print("")
     if player_score < 21:
         return player_hand
     elif player_score > 21:
+        time.sleep(1.0)
         print(pyfiglet.figlet_format("BUST !"))
         return player_hand
     elif player_score == 21:
+        time.sleep(1.0)
         print(pyfiglet.figlet_format("BLACKJACK !"))
         return player_hand
 
@@ -219,42 +251,48 @@ def computer_twist(pack, computer_hand):
     computer_score = computer_ace_values(computer_hand)
     while computer_score <= random.choice(range(16, 19)):
         print("")
+        time.sleep(0.5)
+        typing_print("The computer selected Twist\n")
         print("")
-        print("The computer selected Twist")
-        print("Dealing the computer a new card")
-        print("")
+        time.sleep(0.5)
+        typing_print("Dealing the computer a new card\n")
         computer_hand_list = list(computer_hand.items())
         computer_hand_list.append(pack.popitem())
-        print(f"The computer's new card is the {computer_hand_list[-1][0]}")
+        time.sleep(0.5)
+        typing_print(f"The computer's new card is the {computer_hand_list[-1][0]}{new_line}")
         computer_hand = dict(computer_hand_list)
         computer_score = sum(computer_hand.values())
     print("")
-    print("The computer chose to Stick")
+    time.sleep(0.5)
+    typing_print("The computer chose to Stick\n")
     print("")
     computer_score = computer_ace_values(computer_hand)
-    print("The computer has:")
+    time.sleep(0.5)
+    typing_print("The computer has: \n")
+    time.sleep(0.5)
     for keys, value in computer_hand.items():
         print(keys)
     print("")
-    print(f"The computer scored: {computer_score}")
+    time.sleep(0.5)
+    typing_print(f"The computer scored: {computer_score}{new_line}")
     return computer_score
 
 
 def compare_scores(player_score, computer_score):
-    print(computer_score)
-    print(player_score)
-    
+    typing_print(f"You scored: {player_score}{new_line}")
 
 
 def play_again():
     """
     Asks user whether they would like to restart the game or end the game
     """
-    new_game = input("Would you like to play again? (Y or N): ").lower()
+    time.sleep(0.5)
+    new_game = typing_input("Would you like to play again? (Y or N): ").lower()
     if new_game == "y":
         play_game()
     elif new_game == "n":
-        print("Bye-bye!")
+        time.sleep(0.5)
+        typing_print("Bye-bye!\n")
         sys.exit()
     else:
         play_again()
