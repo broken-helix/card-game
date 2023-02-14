@@ -6,6 +6,7 @@ import time
 suits = ["Diamonds", "Hearts", "Clubs", "Spades"]
 ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
 values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
+game_wins = {"Player Wins": 0, "Computer Wins": 0}
 
 new_line = "\n"
 
@@ -42,7 +43,7 @@ def game_introduction():
         else:
             typing_print("Sorry. You chose a blank name. Please try again...")
     while True:
-        option = typing_input("Would you like to read the rules (R) or play the game (P)?: ").lower()
+        option = input("Would you like to read the rules (R) or play the game (P)?: ").lower()
         if option == "r":
             display_rules()
         elif option == "p":
@@ -76,6 +77,7 @@ def create_card_pack():
     cardpack = dict(zip(pack, values*4))
     pack = list(cardpack.items())
     typing_print("Shuffling the pack...\n")
+    time.sleep(0.5)
     random.shuffle(pack)
     pack = dict(pack)
     return pack
@@ -92,6 +94,7 @@ def create_computer_hand(pack):
     while len(computer_hand) < 2:
         computer_hand.append(pack.popitem())
     typing_print("Dealing out the cards...\n")
+    time.sleep(0.5)
     print("")
     typing_print("The computer's show card is: \n")
     time.sleep(0.5)
@@ -141,22 +144,22 @@ def player_choice(pack, player_hand):
         return player_score
     else:
         while player_score < 21:
-            stick_twist = typing_input("Would you like to Stick (S) or Twist (T)?: ").lower()
+            stick_twist = input("Would you like to Stick (S) or Twist (T)?: ").lower()
             if stick_twist == "t":
                 print("")
                 time.sleep(0.5)
-                typing_print("You chose to Twist...\n")
+                ("You chose to Twist...")
                 player_hand = twist(pack, player_hand)
                 player_score = sum(player_hand.values())
                 continue
             elif stick_twist == "s":
                 print("")
-                typing_print(f"You chose to Stick with {player_score} points{new_line}")
+                print(f"You chose to Stick with {player_score} points{new_line}")
                 return player_score
                 break
             else:
                 print("")
-                print("Error. You can only select Stick (S) or Twist (T)!\n")
+                print("Error. You can only select Stick (S) or Twist (T)!")
                 continue
         return player_score   
 
@@ -252,7 +255,7 @@ def computer_twist(pack, computer_hand):
     while computer_score <= random.choice(range(16, 19)):
         print("")
         time.sleep(0.5)
-        typing_print("The computer selected Twist\n")
+        print("The computer selected Twist")
         print("")
         time.sleep(0.5)
         typing_print("Dealing the computer a new card\n")
@@ -265,7 +268,7 @@ def computer_twist(pack, computer_hand):
         computer_score = computer_ace_values(computer_hand)
     print("")
     time.sleep(0.5)
-    typing_print("The computer chose to Stick\n")
+    print("The computer chose to Stick")
     print("")
     time.sleep(0.5)
     typing_print("The computer has: \n")
@@ -288,44 +291,76 @@ def computer_twist(pack, computer_hand):
 
 
 def compare_scores(player_score, computer_score):
+    """
+    Prints the players score again and then
+    compares scores to decide on the winner and
+    increments the game wins values in the dictionary
+    """
     typing_print(f"You scored: {player_score}{new_line}")
+    print("")
+    time.sleep(1.0)
     if player_score == 21:
         if computer_score > 21:
             print("You won with BlackJack!!!")
+            if "Player Wins" in game_wins:
+                game_wins["Player Wins"] += 1
         elif computer_score == 21:
             print("You both got Blackjack!!! It's a draw!")
+        else:
+            print("You won with BlackJack!!!")
+            if "Player Wins" in game_wins:
+                game_wins["Player Wins"] += 1
     elif player_score > 21:
         if computer_score == 21:
             print("The computer got Blackjack!!! You lost the game!")
+            if "Computer Wins" in game_wins:
+                game_wins["Computer Wins"] += 1
         elif computer_score > 21:
             print("You both went BUST!!!")
         elif computer_score < 21:
             print("You lost the game!")
+            if "Computer Wins" in game_wins:
+                game_wins["Computer Wins"] += 1
     else:
         if computer_score == 21:
             print("The computer got Blackjack!!! You lost the game!")
+            if "Computer Wins" in game_wins:
+                game_wins["Computer Wins"] += 1
         elif computer_score > 21:
             print("The computer went BUST!!! You won the game!")
+            if "Player Wins" in game_wins:
+                game_wins["Player Wins"] += 1
         else:
             if computer_score < player_score:
                 print("You won the game!")
+                if "Player Wins" in game_wins:
+                    game_wins["Player Wins"] += 1
             elif computer_score > player_score:
                 print("You lost the game!")
+                if "Computer Wins" in game_wins:
+                    game_wins["Computer Wins"] += 1
             else:
                 print("It's a draw!")
-
+    time.sleep(0.5)
+    print("")
+    print(f'Player Wins: {game_wins["Player Wins"]}')
+    print(f'Computer Wins: {game_wins["Computer Wins"]}')
 
 def play_again():
     """
     Asks user whether they would like to restart the game or end the game
     """
-    time.sleep(0.5)
-    new_game = typing_input("Would you like to play again? (Y or N): ").lower()
+    print("")
+    time.sleep(1.0)
+    new_game = input("Would you like to play again? (Y or N): ").lower()
     if new_game == "y":
+        print("")
+        print(pyfiglet.figlet_format("Let's Play ..."))
         play_game()
     elif new_game == "n":
         time.sleep(0.5)
-        typing_print("Bye-bye!\n")
+        print("")
+        print(pyfiglet.figlet_format("Thanks for\nplaying\nBlackjack !!!"))
         sys.exit()
     else:
         play_again()
