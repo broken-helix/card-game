@@ -4,7 +4,7 @@
   Blackjack is a python terminal game hosted on Heroku.  Blackjack is a classic card game where players try to get a higher score than the opponent, without going higher than 21 points. If the player gets a score of exactly 21, they have Blackjack.<br><br>
   The Blackjack python game is played by a single player, with the opponent being the computer.  Unless the score is equal to or greater than 21 points, the player will be given the option to either stick with their current cards or twist, which tells the program to deal another card to the players hand. Once the player has finished their turn, either by selecting to stick, reaching a score of 21 or going over the 21 point limit, the computer will make its choice to stick or twist, unless it has a score of equal to or greater than 21 point. Once all selections have been completed, the program decides who won and increments the game play scores.<br><br>
   Each card in the pack has a value:
-* Number cards have the same value as their respective number (ie 2 of Hearts is worth 2 points)
+* Number cards have the same value as their respective number (for example: the 2 of Hearts is worth 2 points)
 * Jack, Queen and King cards have a value of 10 points
 * The Ace starts with a score of 11 points, but can change to 1 point if the overall score is too high
 
@@ -58,7 +58,7 @@ A Lucid flowchart was created to map out the flow of the game
 ### **User Stories:**
 
 * As a user, I want to be able to read the rules of the game
-* As a user, I want to believe I can influence the game by sleecting options
+* As a user, I want to believe I can influence the game by selecting options
 * As a user, I want to believe the game is one of chance and the cards are randomly assigned
 ***
 
@@ -180,7 +180,7 @@ and the computer are compared and a message is displayed to let the player know 
 
 ![PEP8 Validation](/docs/PEP8-validation.jpg)
 ​
-* Functionality - The game has been played multiple times, in the Heroku deployment and within the GitPod terminal, to ensure that all options are covered. This involved manully attributing cards to player and computer, for instance to check that a starting hand of two Aces did not result in a score of 22, which would make either player bust before they had begun the game. At points, the code was slimmed down and hand values were manually attributed in Python Tutor, to check the flow of the code and fix issues with return statements not returning the correct score for comparing results. Options have been checked to enure that incorrect values are handled correctly and do not result in errors which prevent the continuation of the game.  Examples of these error handling features have been included throughout this file.
+* Functionality - The game has been played multiple times, in the Heroku deployment and within the GitPod terminal, to ensure that all options are covered. This involved manually attributing cards to player and computer, for instance to check that a starting hand of two Aces did not result in a score of 22, which would make either player bust before they had begun the game. At points, the code was slimmed down and hand values were manually attributed in Python Tutor, to check the flow of the code and fix issues with return statements not returning the correct score for comparing results. Options have been checked to ensure that incorrect values are handled correctly and do not result in errors which prevent the continuation of the game.  Examples of these error handling features have been included throughout this file.
 
 ![Testing Image](/docs/ace-testing.jpg)
 ***
