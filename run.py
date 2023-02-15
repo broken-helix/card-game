@@ -419,6 +419,7 @@ def play_again():
         print(pyfiglet.figlet_format("Thanks for\nplaying\nBlackjack !!!"))
         sys.exit()
     else:
+        print("Sorry. You can only select Yes 'Y' or No 'N'. Please try again./n")
         play_again()
 
 
