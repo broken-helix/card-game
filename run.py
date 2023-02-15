@@ -413,7 +413,7 @@ The computer will choose to 'TWIST' or 'STICK' - which finishes the game.""")
 def typing_print(text):
     """
     Controls for typing effect for print statements.
-    Typing text code from:
+    Not my code. Typing text code borrowed with thanks from:
     https://www.101computing.net/python-typing-text-effect/
     """
     for character in text:
@@ -425,7 +425,7 @@ def typing_print(text):
 def typing_input(text):
     """
     Controls for typing effect for input print statements
-    Typing text code from:
+    Not my code. Typing text code borrowed with thanks from:
     https://www.101computing.net/python-typing-text-effect/
     """
     for character in text:
