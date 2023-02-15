@@ -52,10 +52,10 @@ def game_introduction():
             break
         elif name == "Computer":
             typing_print("\nSorry. You can't choose that name."
-                         " Please try again...")
+                         " Please try again...\n")
         else:
             typing_print("\nSorry. You chose a blank name."
-                         " Please try again...")
+                         " Please try again...\n")
     # input for game or rules option
     while True:
         option = input("Would you like to read the rules 'R'"
@@ -68,7 +68,7 @@ def game_introduction():
             play_game()
         else:
             print("Sorry. You can only select 'R' (rules)"
-                  " or 'P' (play game)...")
+                  " or 'P' (play game)...\n")
 
 
 def display_rules():
@@ -113,7 +113,7 @@ The computer will choose to 'TWIST' or 'STICK' - which finishes the game.""")
         play_game()
     else:
         print("\nSorry. You can only select 'P' (play game)"
-              " or 'X' (exit game)...")
+              " or 'X' (exit game)...\n")
 
 
 def create_card_pack():
@@ -216,7 +216,7 @@ def player_choice(pack, player_hand):
                 break
             else:
                 print("Error. You can only select Stick 'S'"
-                      " or Twist (T)!\n")
+                      " or Twist 'T'!\n")
                 continue
         return player_score
 
