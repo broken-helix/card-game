@@ -64,7 +64,7 @@ A Lucid flowchart was created to map out the flow of the game
 
 ### **Site Aims:**
 
-* To introduce the user to the Rock, Paper, Scissors game.
+* To introduce the user to the game of Blackjack.
 * For playing the game to be simple and intuitive.
 * To keep a record of the total score.
 * To provide the user with a clear indication of who won.
