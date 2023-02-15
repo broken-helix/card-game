@@ -4,9 +4,9 @@
   Blackjack is a python terminal game hosted on Heroku.  Blackjack is a classic card game where players try to get a higher score than the opponent, without going higher than 21 points. If the player gets a score of exactly 21, they have Blackjack.<br><br>
   The Blackjack python game is played by a single player, with the opponent being the computer.  Unless the score is equal to or greater than 21 points, the player will be given the option to either stick with their current cards or twist, which tells the program to deal another card to the players hand. Once the player has finished their turn, either by selecting to stick, reaching a score of 21 or going over the 21 point limit, the computer will make its choice to stick or twist, unless it has a score of equal to or greater than 21 point. Once all selections have been completed, the program decides who won and increments the game play scores.<br><br>
   Each card in the pack has a value:
-* Number cards have the same value as their respective number (for example: the 2 of Hearts is worth 2 points)
-* Jack, Queen and King cards have a value of 10 points
-* The Ace starts with a score of 11 points, but can change to 1 point if the overall score is too high
+* Number cards have the same value as their respective number (for example: the 2 of Hearts is worth 2 points).
+* Jack, Queen and King cards have a value of 10 points.
+* The Ace starts with a score of 11 points, but can change to 1 point if the overall score is too high.
 
 [View the live project here](https://blackjack-game.herokuapp.com/)
 
@@ -44,22 +44,22 @@
 
 ### **Flowchart:**
 
-A Lucid flowchart was created to map out the flow of the game
+A Lucid flowchart was created to map out the flow of the game.
 
 ![Flowchart](/docs/flowchart-lucid.jpg)
 ***
 
 ### **Target Audiences:**
 
-* People who want to learn about the game of Blackjack
-* People who want to play a simple game of cards
+* People who want to learn about the game of Blackjack.
+* People who want to play a simple game of cards.
 ***
 
 ### **User Stories:**
 
-* As a user, I want to be able to read the rules of the game
-* As a user, I want to believe I can influence the game by selecting options
-* As a user, I want to believe the game is one of chance and the cards are randomly assigned
+* As a user, I want to be able to read the rules of the game.
+* As a user, I want to believe I can influence the game by selecting options.
+* As a user, I want to believe the game is one of chance and the cards are randomly assigned.
 ***
 
 ### **Site Aims:**
@@ -68,7 +68,7 @@ A Lucid flowchart was created to map out the flow of the game
 * For playing the game to be simple and intuitive.
 * To keep a record of the total score.
 * To provide the user with a clear indication of who won.
-* To build a python terminal game
+* To build a python terminal game.
 ***
 
 ## **Current Features**
@@ -131,7 +131,7 @@ will be totalled, any Aces checked for high values if the score is over 21 and t
 #### *Ace Values:*
 
 * In Blackjack, an Ace card can have two values, 11 or 1 points. An Ace card is considered to have 1 point if the score would otherwise be greater than 21 points.<br><br>
-* A separate function handles these cases, first assessing if the score is (or remains) above 21 points, then looking for Aces in the player hand with a value of 11 and changing the first incidence to a value of 1.  When the score is less than or equal to 21 or is greater than 21 and there are no Aces with a value of 11, the game continues.
+* A separate function handles these cases, first assessing if the score is (or remains) above 21 points, then looking for Aces in the player hand with a value of 11 and changing the first incidence to a value of 1. When the score is less than or equal to 21 or is greater than 21 and there are no Aces with a value of 11, the game continues.
 
 ![Ace Values](/docs/ace-values.jpg)
 
@@ -170,8 +170,8 @@ and the computer are compared and a message is displayed to let the player know 
 
 * Limit the number of cards that can be selected by either player, so that a hand can only have a maximum number of cards.
 * Disable the ability to press keys during typing text inputs, which can result in the program misinterpreting the chosen option if the input message is interrupted.
-* Add colours to print messages to highlight win and loss states
-* Add an option to reset the scores and continue playing the game without exiting and restarting
+* Add colours to print messages to highlight win and loss states.
+* Add an option to reset the scores and continue playing the game without exiting and restarting.
 ***
 
 ## **Testing Phase**
