@@ -100,9 +100,8 @@ player chooses a letter other than the two options listed and repeats the game s
 #### *Dealing Hands:*
 
 * When the player selects to play the game, a shuffled dictionary of 52 cards is created, with each card containing a key of the card symbol and suit and a value. The computer and player 
-are then given two cards from pack of cards.<br><br>
-* The player will only be shown one of the computer cards and will not be told the computer starting score. The player will be told what both 
-of their cards are.<br><br>
+are then given two cards from the pack of cards.<br><br>
+* The player will only be shown one of the computer cards and will not be told the computer starting score. The player will be told what both of their cards are.<br><br>
 * If the player is dealt two Aces, which would give the player a score of 22, the cards are checked and one of the Ace values is changed from 11 points to 1 point before 
 the player is told their current score.<br><br>
 * If the player has 21 points at this stage, a message is displayed to inform the player that they have Blackjack and play switches to the computer.<br><br>
@@ -114,7 +113,7 @@ the player is told their current score.<br><br>
 
 * When the player chooses to Twist, the program selects a new card from the pack and places it in the players hand. The card values are totalled and checked for Aces with a value of 11 
 if the score is greater than 21 points. If the score is higher than 21 after Aces have been checked for and revalued if necessary, the player will be told they are bust and their turn will 
-end. If the score is 21, the player will be informed they have blackjack and their turn will end. If the score is less than 21 points, they player will again be asked if they would like 
+end. If the score is 21, the player will be informed they have blackjack and their turn will end. If the score is less than 21 points, the player will again be asked if they would like 
 to stick or twist.<br><br>
 * Once the player has selected to stick, their turn will end.
 
@@ -131,7 +130,7 @@ will be totalled, any Aces checked for high values if the score is over 21 and t
 #### *Ace Values:*
 
 * In Blackjack, an Ace card can have two values, 11 or 1 points. An Ace card is considered to have 1 point if the score would otherwise be greater than 21 points.<br><br>
-* A separate function handles these cases, first assessing if the score is (or remains) above 21 points, then looking for Aces in the player hand with a value of 11 and changing the first incidence to a value of 1. When the score is less than or equal to 21 or is greater than 21 and there are no Aces with a value of 11, the game continues.
+* A separate function handles these cases, first assessing if the score is (or remains) above 21 points, then looking for Aces in the player hand with a value of 11 and changing the first incidence to a value of 1. When the score is less than or equal to 21, or is greater than 21, and there are no Aces with a value of 11, the game continues.
 
 ![Ace Values](/docs/ace-values.jpg)
 
@@ -158,7 +157,7 @@ and the computer are compared and a message is displayed to let the player know 
 
 #### *Pyfiglet Generator:*
 
-* The pyfiglet import allows the display of ASCII text to display messages. It is used for the welcome messages and to flag that either player has achieved Blackjack or went Bust.
+* The pyfiglet import allows the display of ASCII text to display messages. It is used for the welcome and goodbye messages and to flag that either player has achieved Blackjack or went Bust.
 
 ![Pyfiglet Messages](/docs/pyfiglet-bust.jpg)
 ​
@@ -172,6 +171,7 @@ and the computer are compared and a message is displayed to let the player know 
 * Disable the ability to press keys during typing text inputs, which can result in the program misinterpreting the chosen option if the input message is interrupted.
 * Add colours to print messages to highlight win and loss states.
 * Add an option to reset the scores and continue playing the game without exiting and restarting.
+* Allow the player to bet from a predetermined wallet of tokens.
 ***
 
 ## **Testing Phase**
@@ -180,7 +180,7 @@ and the computer are compared and a message is displayed to let the player know 
 
 ![PEP8 Validation](/docs/PEP8-validation.jpg)
 ​
-* Functionality - The game has been played multiple times, in the Heroku deployment and within the GitPod terminal, to ensure that all options are covered. This involved manually attributing cards to player and computer, for instance to check that a starting hand of two Aces did not result in a score of 22, which would make either player bust before they had begun the game. At points, the code was slimmed down and hand values were manually attributed in Python Tutor, to check the flow of the code and fix issues with return statements not returning the correct score for comparing results. Options have been checked to ensure that incorrect values are handled correctly and do not result in errors which prevent the continuation of the game.  Examples of these error handling features have been included throughout this file.
+* Functionality - The game has been played multiple times, in the Heroku deployment and within the GitPod terminal, to ensure that all options are covered. This involved manually attributing cards to player and computer in the GitPod environment, for instance to check that a starting hand of two Aces did not result in a score of 22, which would make either player bust before they had begun the game. At points, the code was slimmed down and hand values were manually attributed in Python Tutor, to check the flow of the code and fix issues with return statements not returning the correct score for comparing results. Options have been checked to ensure that incorrect values are handled correctly and do not result in errors which prevent the continuation of the game.  Examples of these error handling features have been included throughout this file.
 
 ![Testing Image](/docs/ace-testing.jpg)
 ***
@@ -198,14 +198,14 @@ and the computer are compared and a message is displayed to let the player know 
 
 ## **Deployment**
 
+The live site can be found at the following URL - [Blackjack](https://blackjack-game/herokuapp.com)<br>
+
 I deployed the page on Heroku via the following procedure:
 ​
 1. I selected new on the apps page of Heroku's dashboard and created a new app
 2. I added a key of PORT and a value of 8000 to the Config Vars
 3. I added two buildpacks, python and nodejs, with python listed first
 4. I searched for the repository and manually deployed to Heroku
-​
-The live site can be found at the following URL - [Blackjack](https://blackjack-game/herokuapp.com)
 ***
 
 ## **Tech**

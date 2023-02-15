@@ -8,32 +8,6 @@ ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10",
          "Jack", "Queen", "King", "Ace"]
 values = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11]
 
-game_wins = {"Player Wins": 0, "Computer Wins": 0}
-
-
-def typing_print(text):
-    """
-    Controls for typing effect
-    for print statements
-    """
-    for character in text:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        time.sleep(0.05)
-
-
-def typing_input(text):
-    """
-    Controls for typing effect
-    for input print statements
-    """
-    for character in text:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        time.sleep(0.05)
-    value = input()
-    return value
-
 
 def game_introduction():
     """
@@ -69,51 +43,6 @@ def game_introduction():
         else:
             print("Sorry. You can only select 'R' (rules)"
                   " or 'P' (play game)...\n")
-
-
-def display_rules():
-    """
-    Displays the rules of the game
-    """
-    print("""\n
-
-BLACKJACK RULES AND GAMEPLAY
-
-The aim of the game is to score more points than the computer,
-without scoring more than 21 points.
-
-Points are awarded equal to the number on the playing cards
-dealt to each player.
-
-Picture cards (Jack, Queen and King) are worth 10 points each.
-
-The Ace is worth 11 points OR 1 point, depending on the total score.
-
-When the game starts, players are dealt 2 cards each from the shuffled
-pack of cards. You will only 'see' one of the computer's cards.
-
-If you have a score less than 21 points, you will have the option
-to either STICK with the cards you have or TWIST and receive another card.
-
-If you score 21 points with your first 2 cards,
-you score BLACKJACK and the game continues.
-
-If you score more than 21 points, you will be BUST and the game continues.
-
-The computer will choose to 'TWIST' or 'STICK' - which finishes the game.""")
-    # input to start or exit the game
-    option = input("\n\nPress 'P' to Play or 'X' to exit: \n").lower()
-    if option == "x":
-        print("\n")
-        print(pyfiglet.figlet_format("Come  back\nsoon !!!"))
-        sys.exit()
-    elif option == "p":
-        print("\n")
-        print(pyfiglet.figlet_format("Let's Play ..."))
-        play_game()
-    else:
-        print("\nSorry. You can only select 'P' (play game)"
-              " or 'X' (exit game)...\n")
 
 
 def create_card_pack():
@@ -434,6 +363,80 @@ def play_game():
     computer_score = computer_twist(pack, computer_hand)
     compare_scores(player_score, computer_score)
     play_again()
+
+
+def display_rules():
+    """
+    Displays the rules of the game
+    """
+    print("""\n
+
+BLACKJACK RULES AND GAMEPLAY
+
+The aim of the game is to score more points than the computer,
+without scoring more than 21 points.
+
+Points are awarded equal to the number on the playing cards
+dealt to each player.
+
+Picture cards (Jack, Queen and King) are worth 10 points each.
+
+The Ace is worth 11 points OR 1 point, depending on the total score.
+
+When the game starts, players are dealt 2 cards each from the shuffled
+pack of cards. You will only 'see' one of the computer's cards.
+
+If you have a score less than 21 points, you will have the option
+to either STICK with the cards you have or TWIST and receive another card.
+
+If you score 21 points with your first 2 cards,
+you score BLACKJACK and the game continues.
+
+If you score more than 21 points, you will be BUST and the game continues.
+
+The computer will choose to 'TWIST' or 'STICK' - which finishes the game.""")
+    # input to start or exit the game
+    option = input("\n\nPress 'P' to Play or 'X' to exit: \n").lower()
+    if option == "x":
+        print("\n")
+        print(pyfiglet.figlet_format("Come  back\nsoon !!!"))
+        sys.exit()
+    elif option == "p":
+        print("\n")
+        print(pyfiglet.figlet_format("Let's Play ..."))
+        play_game()
+    else:
+        print("\nSorry. You can only select 'P' (play game)"
+              " or 'X' (exit game)...\n")
+
+
+def typing_print(text):
+    """
+    Controls for typing effect for print statements.
+    Typing text code from:
+    https://www.101computing.net/python-typing-text-effect/
+    """
+    for character in text:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+
+
+def typing_input(text):
+    """
+    Controls for typing effect for input print statements
+    Typing text code from:
+    https://www.101computing.net/python-typing-text-effect/
+    """
+    for character in text:
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    value = input()
+    return value
+
+
+game_wins = {"Player Wins": 0, "Computer Wins": 0}
 
 
 game_introduction()
