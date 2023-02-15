@@ -14,7 +14,7 @@ selections have been completed, the program decides who won and increments the g
 
 [View the live project here](https://blackjack-game.herokuapp.com/)
 
-![Game Screenshot](/docs/am-i-responsive.jpg)
+![Title Screenshot](/docs/title-screen.jpg)
 ***
 
 ## Table of contents:
@@ -49,7 +49,7 @@ selections have been completed, the program decides who won and increments the g
 
 ### **Flowchart:**
 
-A flowchart was created to map out the flow of the game
+A Lucid flowchart was created to map out the flow of the game
 
 ![Flowchart](/docs/flowchart-lucid.jpg)
 ***
@@ -73,7 +73,7 @@ A flowchart was created to map out the flow of the game
 * For playing the game to be simple and intuitive.
 * To keep a record of the total score.
 * To provide the user with a clear indication of who won.
-* To build a pythin terminal game
+* To build a python terminal game
 ***
 
 ## **Current Features**
@@ -87,9 +87,9 @@ does not feature in the rest of the game, but would handle conflicts if the play
 
 ![Welcome Title](/docs/welcome-title.jpg)
 
-![Name options errors](/docs/name-errors)
+![Hello Player Title](/docs/hello-name.jpg)
 
-![Hello Player Title](/docs/hello-player.jpg)
+![Name options errors](/docs/computer-name-error.jpg)
 
 #### *Game Start Options:*
 
@@ -97,9 +97,11 @@ does not feature in the rest of the game, but would handle conflicts if the play
 player chooses a letter other than the two options listed and repeats the game start option input message. If the player chooses the read the rules, the rules are displayed and the player 
 has an option to leave the game or play the game. Error handling again checks the players response and repeats the question if a selection is made other than the two offered.
 
-![Game Start Options](/docs/game-start-options.jpg)
+![Game Start Options](/docs/start-game-options.jpg)
 
-![Game Start Error Message](/docs/game-start-error)
+![Rules Display](/docs/rules.jpg)
+
+![Game Start Error Message](/docs/start-game-error.jpg)
 
 #### *Dealing Hands:*
 
@@ -108,7 +110,8 @@ are then given two cards from pack of cards. The player will only be shown one o
 of their cards are. If the player is dealt two Aces, which would give the player a score of 22, the cards are checked and one of the Ace values is changed from 11 points to 1 point before 
 the player is told their current score. If the player has 21 points at this stage, a message is displayed to inform the player that they have Blackjack and play switches to the computer. 
 If they player has any score below 21, they are asked if they would like to stick with their cards and end their turn or receive an additional card (Twist).
-![Dealing Hands](/docs/dealing-hands)
+
+![Dealing Hands](/docs/lets-play.jpg)
 
 #### *Twisting:*
 
@@ -116,6 +119,8 @@ If they player has any score below 21, they are asked if they would like to stic
 if the score is greater than 21 points. If the score is higher than 21 after Aces have been checked for and revalued if necessary, the player will be told they are bust and their turn will 
 end. If the score is 21, the player will be informed they have blackjack and their turn will end. If the score is less than 21 points, they player will again be asked if they would like 
 to stick or twist. Once the player has selected to stick, their turn will end.
+
+![Blackjack Message](/docs/blackjack.jpg)
 
 * Once the player has finished creating their hand, either by sticking, going bust or reaching blackjack, the program will run the process for the computer. At this stage, the computer score 
 will be totalled, any Aces checked for high values if the score is over 21 and the program will decide whether the computer should stick or twist. The computer will twist if the score is below a certain number of points, which is randomly selected each time. This ensures the player cannot determine what score will be likely to win. Each time the computer twists, the scores are 
@@ -130,42 +135,34 @@ a message will be displayed to that effect.
 * In Blackjack, an Ace card can have two values, 11 or 1 points. An Ace card is considered to have 1 point if the score would otherwise be greater than 21 points. A separate function handles 
 these cases, first assessing if the score is (or remains) above 21 points, then looking for Aces in the player hand with a value of 11 and changing the first incidence to a value of 1.  When the score is less than or equal to 21 or is greater than 21 and there are no Aces with a value of 11, the game continues.
 
-![Ace Values](/docs/ace values.jpg)
+![Ace Values](/docs/ace-values.jpg)
 
 #### *Compare Scores:*
 
 * When both the player and computer have completed their turns - either because they chose to stick, or the respective score was equal to or greater than 21 - the scores of the player 
 and the computer are compared and a message is displayed to let the player know who won the game.
 
-![Game State Area](/docs/game-state-area-default.jpg)
+![Compare Scores](/docs/compare-scores.jpg)
 
 #### *Play Again:*
 
 * Once the game is complete, the player is presented with the option to continue playing another game or to exit the game. If the player chooses to continue the game, the incremented score total is maintained, so that the player can play a series of games and recieve a running total of games won. An error handling option deals with situations where the player selects an option other than the two presented and repeats the original input request.
 
-![Play Again Option](/docs/play-again.jpg)
-
-![Game Win Total](/docs/game-win-total.jpg)
-
-![Play Again Error](/docs/play-again-error.jpg)
+![Play Again With Error](/docs/play-again-with-error.jpg)
 
 #### *Typing text:*
 
 * Most print statements use a typing text effect, which assists in slowing down the presentation of information, so the user can easily keep track of the game. This function also adds suspense, making the game more interesting for the player. Only one of the input messages, for the player name, uses the typing text function, to avoid the player having to wait to select their option. Some other print statements, feeding back to the player the choice made, also avoid typing text, to avoid slowing down the game too much.
 
-![Typing Text Function](/docs/typing-text.jpg)
-
 #### *Pyfiglet Generator:*
 
 * The pyfiglet import allows the display of ASCII text to display messages. It is use for the welcome messages and to flag that either player has achieved Blackjack or went Bust.
 
-![Pyfiglet Messages](/docs/pyfiglet-messages.jpg)
+![Pyfiglet Messages](/docs/pyfiglet-bust.jpg)
 ​
 #### *Time Pauses:*
 
 * The import of time enables the use of pauses to add drama and suspense to the game, particularly when waiting for the results of actions to be presented. For instance, there is a small pause before blackjack or bust messages are displayed and while the player is waiting to see the results of a twist action. Time is also use to end the game when the player selects the option to end the game.
-
-![Dramatic Pause](/docs/pause.jpg)
 
 ## **Future-Enhancements**
 
@@ -177,11 +174,13 @@ and the computer are compared and a message is displayed to let the player know 
 
 ## **Testing Phase**
 
-* Validation - The code was passed through the Code Institute PEP8 validation tool, and errors with whitespace and lines too long in length were corrected
-​
-* Functionality - The game has been played multiple times, in the Heroku deployment and within the GitPod terminal, to ensure that all options are covered. This involved manully attributing cards to player and computer, for instance to check that a starting hand of two Aces did not result in a score of 22, which would make either player bust before they had begun the game. At points, the code was slimmed down and hand values were manually attributed in Python Tutor, to check the flow of the code and fix issues with return statements not returning the correct score for comparing results. Options have been checked to enure that incorrect values are handled correctly and do not result in errors which prevent the continuation of the game.
+* Validation - The code was passed through the Code Institute PEP8 validation tool, and errors with whitespace and lines too long in length were corrected.
 
-![Testing Image](/docs/testing.jpg)
+![PEP8 Validation](/docs/PEP8-validation.jpg)
+​
+* Functionality - The game has been played multiple times, in the Heroku deployment and within the GitPod terminal, to ensure that all options are covered. This involved manully attributing cards to player and computer, for instance to check that a starting hand of two Aces did not result in a score of 22, which would make either player bust before they had begun the game. At points, the code was slimmed down and hand values were manually attributed in Python Tutor, to check the flow of the code and fix issues with return statements not returning the correct score for comparing results. Options have been checked to enure that incorrect values are handled correctly and do not result in errors which prevent the continuation of the game.  Examples of these error handling features have been included throughout this file.
+
+![Testing Image](/docs/ace-testing.jpg)
 ***
 
 ## **Bugs**
@@ -199,12 +198,12 @@ and the computer are compared and a message is displayed to let the player know 
 
 I deployed the page on Heroku via the following procedure:
 ​
-1. 
-2. 
-3. 
-4. 
+1. I selected new on the apps page of Heroku's dashboard and created a new app
+2. I added a key of PORT and a value of 8000 to the Config Vars
+3. I added two buildpacks, python and nodejs, with python listed first
+4. I searched for the repository and manually deployed to Heroku
 ​
-The live site can be found at the following URL - [Blackjack](https://heroku/).
+The live site can be found at the following URL - [Blackjack](https://blackjack-game/herokuapp.com)
 ***
 
 ## **Tech**
@@ -214,9 +213,19 @@ The following technologies were employed in the creation of the site:
 - Python
 - Pyfiglet Generator
 - Typing text
+- PythonTutor Composing Program
+- Lucid Flowcharts
 ***
 
 ## **Credits**
+
+* [Typing text](https://www.101computing.net/python-typing-text-effect/)
+
+* [Pyfiglet ASCII Text Generator](https://www.geeksforgeeks.org/python-ascii-art-using-pyfiglet-module/)
+
+* [Python Tutor Composing Program](https://pythontutor.com/cp/composingprograms.html#mode=edit)
+
+* [Exiting the Game with sys.exit()](https://stackoverflow.com/questions/65653491/is-there-a-way-to-stop-a-program-from-running-if-an-input-is-incorrect-python/)
 
 ### **Honorable mentions**
 
@@ -233,6 +242,6 @@ The following technologies were employed in the creation of the site:
 
 ### **Content:**
 
-* Pyfiglet source
+* Pyfiglet source - [Pyfiglet](https://pypi.org/project/pyfiglet/0.7/)
 
-* Flowchart source
+* Flowchart source - [Lucid Chart](https://lucidchart.com/)
