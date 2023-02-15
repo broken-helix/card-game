@@ -45,7 +45,7 @@ def game_introduction():
     print("\n")
     print(pyfiglet.figlet_format("WELCOME TO\nBLACKJACK  !"))
     while True:
-        name = typing_input("Please enter your player name: ").capitalize()
+        name = typing_input("Please enter your player name: \n").capitalize()
         if (name != "Computer") and (name != ""):
             print("\n")
             print(pyfiglet.figlet_format(f"Hello {name} !"))
@@ -59,7 +59,7 @@ def game_introduction():
     # input for game or rules option
     while True:
         option = input("Would you like to read the rules 'R'"
-                       " or play the game 'P'?: ").lower()
+                       " or play the game 'P'?: \n").lower()
         if option == "r":
             display_rules()
         elif option == "p":
@@ -102,7 +102,7 @@ If you score more than 21 points, you will be BUST and the game continues.
 
 The computer will choose to 'TWIST' or 'STICK' - which finishes the game.""")
     # input to start or exit the game
-    option = input("\n\nPress 'P' to Play or 'X' to exit: ").lower()
+    option = input("\n\nPress 'P' to Play or 'X' to exit: \n").lower()
     if option == "x":
         print("\n")
         print(pyfiglet.figlet_format("Come  back\nsoon !!!"))
@@ -198,7 +198,7 @@ def player_choice(pack, player_hand):
     else:
         while player_score < 21:
             stick_twist = input("Would you like to Stick 'S'"
-                                " or Twist 'T'?: ").lower()
+                                " or Twist 'T'?: \n").lower()
             if stick_twist == "t":
                 time.sleep(0.5)
                 print("You chose to Twist...\n")
@@ -408,7 +408,7 @@ def play_again():
     Asks user whether they would like to restart the game or end the game
     """
     time.sleep(1.0)
-    new_game = input("Would you like to play again? (Y or N): ").lower()
+    new_game = input("Would you like to play again? (Y or N): \n").lower()
     if new_game == "y":
         print("\n")
         print(pyfiglet.figlet_format("Let's Play ..."))
