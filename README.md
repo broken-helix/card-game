@@ -198,7 +198,7 @@ and the computer are compared and a message is displayed to let the player know 
 
 ## **Deployment**
 
-The live site can be found at the following URL - [Blackjack](https://blackjack-game/herokuapp.com)<br>
+The live site can be found at the following URL - [Blackjack](https://blackjack-game.herokuapp.com)<br>
 
 I deployed the page on Heroku via the following procedure:
 ​
